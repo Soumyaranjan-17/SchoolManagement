@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Flowbite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Custom Fonts and Styles */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .section-title {
+      font-size: 1.25rem;
+      color: #1d4ed8;
+      font-weight: bold;
+    }
+    .section-content {
+      font-size: 1rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+    .button-primary {
+      background-color: #1d4ed8;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.375rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .button-primary:hover {
+      background-color: #2563eb;
+    }
+    .card {
+      background-color: white;
+      border-radius: 0.375rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="fixed top-0 left-0 h-full bg-blue-900 text-white w-64 transition-all duration-300">
+    <div class="flex justify-between items-center px-4 py-4">
+      <h1 id="sidebar-title" class="text-lg font-bold whitespace-nowrap">College Portal</h1>
+      <button id="toggle-sidebar" class="text-2xl focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <nav class="mt-6 space-y-4 px-4">
+      <a href="#about" class="flex items-center gap-4 text-white hover:bg-blue-800 p-2 rounded">
+        <i class="fas fa-info-circle"></i>
+        <span class="sidebar-text">About</span>
+      </a>
+      <a href="#contact" class="flex items-center gap-4 text-white hover:bg-blue-800 p-2 rounded">
+        <i class="fas fa-address-book"></i>
+        <span class="sidebar-text">Contact</span>
+      </a>
+      <a href="/admin-login" class="flex items-center gap-4 text-white hover:bg-blue-800 p-2 rounded">
+        <i class="fas fa-user-shield"></i>
+        <span class="sidebar-text">Admin Login</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div id="content" class="ml-64 transition-all duration-300 px-6 py-8">
+    <!-- Header -->
+    <header class="bg-white shadow py-4 px-6 mb-6 rounded-lg">
+      <h1 class="text-3xl font-bold text-blue-900">Welcome to BrightFuture College</h1>
+      <p class="text-gray-600 mt-2">A place where your future takes shape.</p>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="card p-6 mb-8">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-content">
+        BrightFuture College is a leading educational institution dedicated to fostering innovation, excellence, and leadership among students. With state-of-the-art facilities and a commitment to holistic development, we prepare students for a bright future.
+      </p>
+    </section>
+
+    <!-- Student Login Form -->
+    <section id="login" class="card p-6 mb-8">
+      <h2 class="section-title">Student Login</h2>
+      <form class="space-y-4">
+        <div>
+          <label class="block text-gray-700">Student ID</label>
+          <input
+            type="text"
+            placeholder="Enter Student ID"
+            class="w-full border border-gray-300 rounded p-2 mb-4 focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-700">Password</label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            class="w-full border border-gray-300 rounded p-2 mb-4 focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <button type="submit" class="button-primary">
+          Login
+        </button>
+      </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="card p-6">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-content">Feel free to reach out to us at:</p>
+      <ul class="list-disc pl-6 text-gray-700">
+        <li>Email: <a href="mailto:contact@brightfuturecollege.edu" class="text-blue-600 hover:underline">contact@brightfuturecollege.edu</a></li>
+        <li>Phone: +1-234-567-890</li>
+        <li>Address: 123 College Ave, BrightCity, BC</li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    // Sidebar Toggle Functionality
+    const sidebar = document.getElementById('sidebar');
+    const toggleButton = document.getElementById('toggle-sidebar');
+    const content = document.getElementById('content');
+    const sidebarTextElements = document.querySelectorAll('.sidebar-text');
+    const sidebarTitle = document.getElementById('sidebar-title');
+
+    toggleButton.addEventListener('click', () => {
+      sidebar.classList.toggle('w-64');
+      sidebar.classList.toggle('w-16');
+      content.classList.toggle('ml-64');
+      content.classList.toggle('ml-16');
+
+      // Hide or Show Text
+      sidebarTextElements.forEach((text) => {
+        if (sidebar.classList.contains('w-16')) {
+          text.classList.add('hidden');
+        } else {
+          text.classList.remove('hidden');
+        }
+      });
+
+      // Adjust Sidebar Title Visibility
+      if (sidebar.classList.contains('w-16')) {
+        sidebarTitle.classList.add('hidden');
+      } else {
+        sidebarTitle.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
