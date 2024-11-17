@@ -1,13 +1,14 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
-const validateStudent = require('../middleware/validateStudent');
-const { checkExistingStudent, createNewStudent } = require('../middleware/studentService');
-const { sendSuccessResponse, sendErrorResponse } = require('../middleware/responseHelper');
+const validateStudent = require('../middlewares/validateStudent');
+const { checkExistingStudent, createNewStudent } = require('../middlewares/studentService');
+const { sendSuccessResponse, sendErrorResponse } = require('../middlewares/responseHelper');
+const authMiddleware = require('../middlewares/auth.middleware');
 const Student = require("../models/student.model"); // Import the Student model
 const router = express.Router();
 
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard",authMiddleware, async (req, res) => {
     try {
         // Fetch all students from the database
         const students = await Student.find(); // You can modify this query to filter, sort, etc.
@@ -20,7 +21,7 @@ router.get("/dashboard", async (req, res) => {
     }
 });
 
-router.get("/add-student", (req, res) => {
+router.get("/add-student", authMiddleware, (req, res) => {
     res.render("add-student");
 });
 
@@ -28,7 +29,7 @@ router.get("/add-student", (req, res) => {
 // app.use(express.urlencoded({ extended: true }));
 // In app
 
-router.post("/add-student", validateStudent, async (req, res) => {
+router.post("/add-student", authMiddleware, validateStudent, async (req, res) => {
     try {
         // Validate input data
         const errors = validationResult(req);
@@ -59,7 +60,7 @@ router.post("/add-student", validateStudent, async (req, res) => {
 });
 
 
-router.delete('/delete-student/:id', async (req, res) => {
+router.delete('/delete-student/:id',authMiddleware, async (req, res) => {
     try {
         const studentId = req.params.id;  // Get the student ID from URL params
 

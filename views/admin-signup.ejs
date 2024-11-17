@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900">
+
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-6">Create an Account</h2>
+            
+            <!-- Signup Form -->
+            <form action="/admin-signup" method="POST" class="space-y-4">
+                
+                <!-- Name Input -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">username</label>
+                    <input type="text" name="username" id="username" required 
+                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                           placeholder="Your username">
+                </div>
+                
+                <!-- Role Input -->
+                <div>
+                    <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300">role</label>
+                    <input type="text" name="role" id="role" required 
+                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                           placeholder="Your Role">
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                    <input type="password" name="password" id="password" required 
+                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                           placeholder="********">
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" 
+                            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+
+            <!-- Login Link -->
+            <p class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+                Already have an account? 
+                <a href="/user/login" class="text-blue-500 hover:underline">Log in here</a>.
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
