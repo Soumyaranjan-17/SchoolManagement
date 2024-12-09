@@ -42,16 +42,29 @@ router.post("/add-student", authMiddleware, validateStudent, async (req, res) =>
         // Check if student already exists
         const existingStudent = await checkExistingStudent(student_id, reg_no);
         if (existingStudent) {
-            return sendErrorResponse(res, existingStudent.student_id === student_id
+            const errorMessage = existingStudent.student_id === student_id
                 ? "Student ID already exists"
-                : "Registration Number already exists", 400);
+                : "Registration Number already exists";
+            return sendErrorResponse(res, errorMessage, 400);
         }
 
         // Create and save the new student
-        const newStudent = await createNewStudent({ student_id, reg_no, roll_no, name, email, phone, address, parents, admission_year });
+        try {
+            const newStudent = await createNewStudent({ 
+                student_id, reg_no, roll_no, name, email, phone, address, parents, admission_year 
+            });
 
-        // Send success response
-        res.render('studentAddedSuccess')
+            // Send success response
+            return res.render("studentAddedSuccess", { newStudent });
+
+        } catch (dbError) {
+            if (dbError.code === 11000) {
+                // Duplicate key error (MongoDB specific)
+                const duplicateField = Object.keys(dbError.keyValue).join(", ");
+                return sendErrorResponse(res, `Duplicate value found for: ${duplicateField}`, 400);
+            }
+            throw dbError; // Re-throw for generic error handling
+        }
 
     } catch (error) {
         console.error("Error while adding student:", error);
