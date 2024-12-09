@@ -27,3 +27,6 @@ const PORT = 3000
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is runing on http://localhost:${PORT}`)
 })
+
+// ENV variables
+// TU9OR09fVVJJPW1vbmdvZGIrc3J2Oi8vd3d3c291bXlhcmFuamFuc2Fob28xNzpSYmJkUDRNNXpKOEV5dktuQGNsdXN0ZXIwLnl5dWI0Lm1vbmdvZGIubmV0L3NjaG9vbGRhdGFiYXNlP3JldHJ5V3JpdGVzPXRydWUmdz1tYWpvcml0eSZhcHBOYW1lPUNsdXN0ZXIw
